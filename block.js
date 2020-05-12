@@ -362,127 +362,128 @@ const LibraryCreator = {
         console.log('%cEntBlocks 2.0 follows the GNU General Public License version 3.0\nEntBlocks 2.0은 GNU General Public License version 3.0를 따릅니다.', 'font-family: sans-serif; font-size: .7rem')
     }
 }
-let blockPOST
-const blocks = [
-    {
-        name: 'fetchBlocks',
-        template: '%1',
-        skeleton: 'basic_text',
-        color: {
-            default: EntryStatic.colorSet.common.TRANSPARENT,
-            darken: EntryStatic.colorSet.common.TRANSPARENT
-        },
-        params: [
-            {
-                type: 'Text',
-                text: 'fetch',
-                color: EntryStatic.colorSet.common.TEXT,
-                align: 'center'
-            }
-        ],
-        def: [],
-        map: {},
-        class: 'text'
-    },
-    {
-        name: 'get',
-        template: '%1 가져오기 (GET)',
-        skeleton: 'basic_string_field',
-        color: {
-            default: EntryStatic.colorSet.block.default.HARDWARE,
-            darken: EntryStatic.colorSet.block.darken.HARDWARE
-        },
-        params: [
-            {
-                type: 'Block',
-                accept: 'string'
-            }
-        ],
-        def: [
-            {
-                type: 'text',
-                params: ['https://playentry.org/api/discuss/findNotice']
-            }
-        ],
-        map: {
-            APIURL: 0
-        },
-        class: 'text',
-        func: async (sprite, script) => {
-            let res = await fetch(script.getValue('APIURL', script))
-            let data = await res.json()
-            return data
-        },
-    },
-    {
-        name: 'post',
-        template: '%1에 %2 올리기 (POST)%3',
-        skeleton: 'basic',
-        color: {
-            default: EntryStatic.colorSet.block.default.HARDWARE,
-            darken: EntryStatic.colorSet.block.darken.HARDWARE
-        },
-        params: [
-            {
-                type: 'Block',
-                accept: 'string'
-            },
-            {
-                type: 'Block',
-                accept: 'string'
-            },
-            {
-                type: 'Indicator',
-                img: 'block_icon/hardware_icon.svg',
-                size: 11,
-            }
-        ],
-        def: [
-            {
-                type: 'text',
-                params: ['https://playentry.org/api/discuss']
-            },
-            {
-                type: 'text',
-                params: [`{ "images": [], "category": "free", "title": "엔트리봇", "content": "사랑스러워", "groupNotice": false }`]
-            },
-            null
-        ],
-        map: {
-            APIURL: 0,
-            DATA: 1
-        },
-        class: 'text',
-        func: async (sprite, script) => {
-            if (confirm(`"올리기(POST) 요청" 을 허용하시겠습니까?\n내용: ${script.getValue('DATA', script)}`)) {
-                let res = await fetch(script.getValue('APIURL', script), {
-                    method: 'POST',
-                    body: script.getValue('DATA', script),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                blockPOST = await res.json()
-            }
-            return script.callReturn()
-        },
-    },
-    {
-        name: 'postData',
-        template: '올리기 응답',
-        skeleton: 'basic_string_field',
-        color: {
-            default: EntryStatic.colorSet.block.default.HARDWARE,
-            darken: EntryStatic.colorSet.block.darken.HARDWARE
-        },
-        params: [],
-        def: [],
-        map: {},
-        class: 'text',
-        func: async (sprite, script) => {
-            return blockPOST
-        },
-    },
+\\let blockPOST
+\\const blocks = [
+\\    {
+\\        name: 'fetchBlocks',
+\\        template: '%1',
+\\        skeleton: 'basic_text',
+\\        color: {
+\\            default: EntryStatic.colorSet.common.TRANSPARENT,
+\\            darken: EntryStatic.colorSet.common.TRANSPARENT
+\\        },
+\\        params: [
+\\            {
+\\                type: 'Text',
+\\                text: 'fetch',
+\\                color: EntryStatic.colorSet.common.TEXT,
+\\                align: 'center'
+\\            }
+\\        ],
+\\        def: [],
+\\        map: {},
+\\        class: 'text'
+\\    },
+\\    {
+\\        name: 'get',
+\\        template: '%1 가져오기 (GET)',
+\\        skeleton: 'basic_string_field',
+\\        color: {
+\\            default: EntryStatic.colorSet.block.default.HARDWARE,
+\\            darken: EntryStatic.colorSet.block.darken.HARDWARE
+\\        },
+\\        params: [
+\\            {
+\\                type: 'Block',
+\\                accept: 'string'
+\\            }
+\\        ],
+\\        def: [
+\\            {
+\\                type: 'text',
+\\                params: ['https://playentry.org/api/discuss/findNotice']
+\\            }
+\\        ],
+\\        map: {
+\\            APIURL: 0
+\\        },
+\\        class: 'text',
+\\        func: async (sprite, script) => {
+\\            let res = await fetch(script.getValue('APIURL', script))
+\\            let data = await res.json()
+\\            return data
+\\        },
+\\    },
+\\    {
+\\        name: 'post',
+\\        template: '%1에 %2 올리기 (POST)%3',
+\\        skeleton: 'basic',
+\\        color: {
+\\            default: EntryStatic.colorSet.block.default.HARDWARE,
+\\            darken: EntryStatic.colorSet.block.darken.HARDWARE
+\\        },
+\\        params: [
+\\            {
+\\                type: 'Block',
+\\                accept: 'string'
+\\            },
+\\            {
+\\                type: 'Block',
+\\
+\\                accept: 'string'
+\\            },
+\\            {
+\\                type: 'Indicator',
+\\                img: 'block_icon/hardware_icon.svg',
+\\                size: 11,
+\\            }
+\\        ],
+\\        def: [
+\\            {
+\\                type: 'text',
+\\                params: ['https://playentry.org/api/discuss']
+\\            },
+\\            {
+\\                type: 'text',
+\\                params: [`{ "images": [], "category": "free", "title": "엔트리봇", "content": "사랑스러워", "groupNotice": false }`]
+\\            },
+\\            null
+\\        ],
+\\        map: {
+\\            APIURL: 0,
+\\            DATA: 1
+\\        },
+\\        class: 'text',
+\\        func: async (sprite, script) => {
+\\            if (confirm(`" ㅇ(POST) 요청" 을 허용하시겠습니까?\n내용: ${script.getValue('DATA', script)}`)) {
+\\                let res = await fetch(script.getValue('APIURL', script), {
+\\                    method: 'POST',
+\\                    body: script.getValue('DATA', script),
+\\                    headers: {
+\\                        'Content-Type': 'application/json'
+\\                    }
+\\                })
+\\                blockPOST = await res.json()
+\\            }
+\\            return script.callReturn()
+\\        },
+\\    },
+\\    {
+\\        name: 'postData',
+\\        template: '올리기 응답',
+\\        skeleton: 'basic_string_field',
+\\        color: {
+\\            default: EntryStatic.colorSet.block.default.HARDWARE,
+\\            darken: EntryStatic.colorSet.block.darken.HARDWARE
+\\        },
+\\        params: [],
+\\        def: [],
+\\        map: {},
+\\        class: 'text',
+\\        func: async (sprite, script) => {
+\\            return blockPOST
+\\        },
+\\    },
     {
         name: 'arrayBlocks',
         template: '%1',
